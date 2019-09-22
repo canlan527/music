@@ -1,0 +1,28 @@
+<view class="player-container" style="background:url({{picUrl}}) center/cover no-repeat"></view>
+<view class="player-mask"></view>
+<!-- 唱片 -->
+<view class="player-info">
+  <!-- 封面信息 -->
+  <view class="player-disc {{isPlaying ? 'play':''}}" bindtap="onChangeLyricShow"
+        hidden="{{isLyricShow}}">
+    <image class="player-img rotation {{isPlaying?'':'rotation-paused'}}"  src="{{picUrl}}"></image>
+  </view>
+   <!-- 歌词 -->
+   <x-lyric class="lyric" isLyricShow="{{!isLyricShow}}"  bindtap="onChangeLyricShow" lyric="{{lyric}}" />
+  <!-- 进度条组件 bind绑定的trigger事件在js里写-->
+  <view class="progress-bar">
+    <x-progress-bar bind:musicEnd="onNext" 
+      bind:updateTime="updateTime"
+      bind:musicPlay="onPlay"
+      bind:musicPause="onPause"
+      isSame="{{isSame}}"
+      />
+  </view>
+
+  <!-- 控制面板 -->
+  <view class="control">
+    <text class="iconfont icon-shangyishoushangyige" bindtap="onPrev"></text>
+    <text class="iconfont {{isPlaying ? 'icon-suspend_icon' : 'icon-play_icon'}}"       bind:tap="togglePlaying"></text>
+    <text class="iconfont icon-xiayigexiayishou" bindtap="onNext"></text>
+  </view>
+</view>  
